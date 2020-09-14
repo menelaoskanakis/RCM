@@ -1,0 +1,5 @@
+from evaluation.evaluation_human_parts import eval_human_parts
+from evaluation.evaluation_normals import eval_normals
+from evaluation.evaluation_saliency import eval_sal
+from evaluation.evaluation_semseg import eval_semseg
+from evaluation.evaluation_depth import eval_depth

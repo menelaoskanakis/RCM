@@ -1,0 +1,118 @@
+# Define training strategy
+training_strategy:
+  max_iter: 37500 # Sixty epochs
+
+# model options
+model:
+  architecture: resnet18
+  # Define accordingly, e.g.
+  # Number of output dimension is defined in the code based on tasks to be solved
+  parameters:
+    # Choose from ['RA_series', 'RA_parallel', 'Conv', 'RC', 'RC_RI']
+    pretrained_architecture: Conv
+    train_enc_norm_layers: True
+    train_enc_conv_layers: True
+    pyramid_pooling: atrous-v3
+    output_stride: 16
+    decoder: True
+    conv_layer: Conv # Choose from: RA_parallel, RA_series, RCM, Conv
+    common_mt_params: False
+    model_dir: ./models
+
+# logger options
+logger:
+  train_log_iter: 100             # How often do you want to log the training stats
+  val_log_iter: 10000              # How often do you want to log the validation stats
+  image_log_iter: 10000            # How often do you want to display output images during training
+  results_dir: ./results/PascalContext
+
+# Define all loss options for the different tasks available
+# The code uses only the ones for the tasks specified below
+loss:
+#  edge:
+#    loss_function: BCEWithLogitsLossWeighted
+#    parameters:
+#      positive_weight: 0.95
+#  semseg:
+#    loss_function: CrossEntropyLoss
+#    parameters:
+#      ignore_index: 255
+#  human_parts:
+#    loss_function: CrossEntropyLoss
+#    parameters:
+#      ignore_index: 255
+  sal:
+    loss_function: BCEWithLogitsLossMasked
+#  normals:
+#    loss_function: L1MaskedLossNormals
+
+# optimization options
+optimizer:
+  algorithm: SGD
+  # Define accordingly, e.g.
+  parameters:
+    lr: 0.005
+    momentum: 0.9
+    weight_decay: 0.0001
+
+
+# learning rate scheduler options
+scheduler:
+  lr_policy: PolynomialLR # Choose: [ConstantLR, PolynomialLR]
+  # Define accordingly, e.g.
+  parameters:
+    max_iter: 37500
+    decay_iter: 1
+    gamma: 0.9
+
+dataset:
+  dataset_name: PascalContextMT
+  tasks_weighting:
+#    edge: 50.
+#    semseg: 1.
+#    human_parts: 2.
+    sal: 5.
+#    normals: 10.
+
+train_dataloader:
+  dataset_args:
+    root: ./data
+    image_set: train
+    # [options: 'RandomCrop, RandomScaling, RandomHorizontallyFlip, PadImage']
+    augmentations:
+      RandomScaling:
+        min_scale_factor: 0.5
+        max_scale_factor: 2.0
+        step_size: 0.25
+      RandomCrop:
+        size: 512 # [height, width] or scalar for square image
+      RandomHorizontallyFlip:
+        p: 0.5
+  dataloader_args:
+    batch_size: 8
+    num_workers: 8
+    shuffle: True
+val_dataloader:
+  dataset_args:
+    root: ./data
+    image_set: val
+    # [options: 'RandomCrop, RandomScaling, RandomHorizontallyFlip, PadImage']
+    augmentations:
+      PadImage:
+        size: 512 # [height, width] or scalar for square image
+  dataloader_args:
+    batch_size: 1
+    num_workers: 8
+    shuffle: False
+sample_imgs_dataloader:
+  dataset_args:
+    root: ./data
+    image_set: sample_imgs
+    # [options: 'RandomCrop, RandomScaling, RandomHorizontallyFlip, PadImage']
+    augmentations:
+      PadImage:
+        size: 512 # [height, width] or scalar for square image
+  dataloader_args:
+    batch_size: 1
+    num_workers: 8
+    shuffle: False
