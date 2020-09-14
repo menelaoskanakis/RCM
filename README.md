@@ -96,7 +96,7 @@ python test.py --gpu_id 0 --config ./configs/PascalContext/semseg_RC_RI_NFF.yaml
 All evaluation scripts are run automatically apart for boundary detection. 
 For that you need to use the MATLAB-based repo of [seism](https://github.com/jponttuset/seism).
 The test.py script generates the predictions and using the provided './evaluation/evaluation_edge.py' script
-you can send the predictions for evaluation be the [seism](https://github.com/jponttuset/seism) repo.
+you can send the predictions for evaluation by the [seism](https://github.com/jponttuset/seism) repo.
 
 
 #### Response Initialization (RI) 
