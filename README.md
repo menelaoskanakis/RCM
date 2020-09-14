@@ -3,7 +3,7 @@
 This is the official repository (in PyTorch) for the ECCV 2020 paper [Reparameterizing Convolutions for Incremental Multi-Task Learning without Task Interference](https://arxiv.org/pdf/2007.12540.pdf).
 
 <p align="center">
-<img src="doc/RCM_main.jpg" width="500">
+<img src="doc/RCM_main.jpg" width="750">
 </p>
 
 ## Abstract
@@ -26,7 +26,7 @@ NYUD, and also demonstrates superior incremental learning capability
 as compared to its close competitors.
 
 <p align="center">
-<img src="doc/RCM.gif" width="500">
+<img src="doc/RCM.gif" width="750">
 </p>
 
 ## Installation / Setup
