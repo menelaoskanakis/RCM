@@ -1,6 +1,6 @@
 # Define training strategy
 training_strategy:
-  max_iter: 37500 # Sixty epochs
+  max_iter: 13020 # Sixty epochs
 
 # model options
 model:
@@ -61,7 +61,7 @@ scheduler:
   lr_policy: PolynomialLR # Choose: [ConstantLR, PolynomialLR]
   # Define accordingly, e.g.
   parameters:
-    max_iter: 37500
+    max_iter: 13020
     decay_iter: 1
     gamma: 0.9
 
