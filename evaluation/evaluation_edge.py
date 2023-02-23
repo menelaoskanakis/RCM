@@ -39,11 +39,11 @@ def eval_edges(save_dir, exp_name, dataset='PascalContextMT', num_req_files=None
         os.system(rsync_str)
 
         # submit the job
-        subm_job_str = 'source /home/sgeadmin/BIWICELL/common/settings.sh; '
+        subm_job_str = 'export SLURM_CONF=/home/sladmcvl/slurm/slurm.conf; '
         subm_job_str += 'cp {}/parameters/HED.txt {}/parameters/{}.txt && ' \
                        .format(seism_cluster_dir, seism_cluster_dir, exp_name)
-        subm_job_str += 'qsub -N evalFb -t 1-102 -q middle.q,long.q {}/src/scripts/eval_in_cluster.py {} {} read_one_cont_png fb 1 102 val' \
-            .format(seism_cluster_dir, exp_name, database)
+        subm_job_str += 'sbatch -J evalFb --array=1-102 /scratch_net/furiosa/kanakism/code/RCM/evaluation/eval_in_cluster.sh {} {} read_one_cont_png fb 1 102 val' \
+            .format(exp_name, database)
         print(subm_job_str)
         os.system(subm_job_str)
 
@@ -86,14 +86,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--script', type=str, help='Run eval_edges or generate_pr_curves')
     parser.add_argument('--exp_names', type=str, help='Experiment names separated by comma. e.g. exp1 or exp1,exp2 ')
+    parser.add_argument('--dataset', type=str, help='Define dataset. e.g. PascalContextMT or NYUDMT')
     opts = parser.parse_args()
 
     exp_names = opts.exp_names.split(',')
     for exp_name in exp_names:
-        save_dir = '/scratch/kanakism/experiments/{}'.format(exp_name)
+        save_dir = '/scratch_net/furiosa/kanakism/experiments/{}'.format(exp_name)
         if opts.script == 'eval_edges':
-            eval_edges(save_dir, exp_name)
+            eval_edges(save_dir, exp_name, opts.dataset)
         elif opts.script == 'generate_pr_curves':
-            generate_pr_curves(save_dir, exp_name)
+            generate_pr_curves(save_dir, exp_name, opts.dataset)
         else:
             raise ValueError('Select either eval_edges or generate_pr_curves')

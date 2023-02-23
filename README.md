@@ -125,10 +125,12 @@ If you are using port forwarding to your local machine, access through `localhos
 If you use this code, please consider citing the following paper:
 
 ```
-@article{kanakis2020reparameterizing,
-  title={Reparameterizing Convolutions for Incremental Multi-Task Learning without Task Interference},
+@inproceedings{kanakis2020reparameterizing,
+  title={Reparameterizing convolutions for incremental multi-task learning without task interference},
   author={Kanakis, Menelaos and Bruggemann, David and Saha, Suman and Georgoulis, Stamatios and Obukhov, Anton and Van Gool, Luc},
-  journal={arXiv preprint arXiv:2007.12540},
-  year={2020}
+  booktitle={Computer Vision--ECCV 2020: 16th European Conference, Glasgow, UK, August 23--28, 2020, Proceedings, Part XX 16},
+  pages={689--707},
+  year={2020},
+  organization={Springer}
 }
 ```
