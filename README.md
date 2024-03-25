@@ -76,11 +76,9 @@ RCM
 └── models (download manually if RC or RA models are needed. Link below.)
 ```
 
-[Download RI (RI subdirectory)](https://data.vision.ee.ethz.ch/kanakism/RI.zip)
+[Download RI (RI subdirectory)](https://drive.google.com/file/d/1dEoTwk6q0MgY6MZYpy5RRV5XnQpndbw6/view?usp=drive_link)
 
-[Download pretrained resnet18 models (models subdirectory)](https://data.vision.ee.ethz.ch/kanakism/pretrained_models.zip)
-
-[Download sample results for the provided configs (results subdirectory)](https://data.vision.ee.ethz.ch/kanakism/results.zip)
+[Download pretrained resnet18 models (models subdirectory)](https://drive.google.com/file/d/1W3QWIMcrhyhbZKJCz2_XSDv6Plt45Ezk/view?usp=drive_link)
 
 ### Code usage (from ```/RCM``` directory in the docker container)
 
